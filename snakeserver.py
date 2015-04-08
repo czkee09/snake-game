@@ -7,7 +7,7 @@ from ctypes import *
 import urlparse
 import json
 
-lib = cdll.LoadLibrary("snake.dll")
+# lib = cdll.LoadLibrary("snake.dll")
 
 
 class GetHandler(BaseHTTPRequestHandler):
@@ -29,7 +29,8 @@ class GetHandler(BaseHTTPRequestHandler):
         print currentFood
         # 开始计算下一步
         result = {"nextstep": 0}
-        step = lib.nextStep(currentFood)
+        # step = lib.nextStep(currentFood)
+        step = 1
         result['nextstep'] = step
 
         print json.dumps(result)

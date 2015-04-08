@@ -1,48 +1,48 @@
-function getElt(id){return document.getElementById(id);}
+ï»¿function getElt(id){return document.getElementById(id);}
 /**************************************************************
-* javascriptÌ°³ÔÉß v2.4 <br />
+* javascriptè´ªåƒè›‡ v2.4 <br />
 * author: sunxing007  05/14/2009<br />
-* ×ªÔØÇë×¢Ã÷À´×Ôhttp://blog.csdn.net/sunxing007 Ğ»Ğ»£¡<br />
-* v2.4ĞŞÕıÁËÉßÉíÑÕÉ«¿ÉÒÔËæ×ÅÉßÇ°½ø¶øÒÆ¶¯
+* è½¬è½½è¯·æ³¨æ˜æ¥è‡ªhttp://blog.csdn.net/sunxing007 è°¢è°¢ï¼<br />
+* v2.4ä¿®æ­£äº†è›‡èº«é¢œè‰²å¯ä»¥éšç€è›‡å‰è¿›è€Œç§»åŠ¨
 **************************************************************/
-    //Ì°³ÔÉßÀà
+    //è´ªåƒè›‡ç±»
 var Snake = {
     tbl: null,
     /**
-     * body: ÉßÉí£¬Êı×é·ÅÉßµÄÃ¿Ò»½Ú£¬
-     * Êı¾İ½á¹¹{x:x0, y:y0, color:color0},
-     * x,y±íÊ¾×ø±ê,color±íÊ¾ÑÕÉ«
+     * body: è›‡èº«ï¼Œæ•°ç»„æ”¾è›‡çš„æ¯ä¸€èŠ‚ï¼Œ
+     * æ•°æ®ç»“æ„{x:x0, y:y0, color:color0},
+     * x,yè¡¨ç¤ºåæ ‡,colorè¡¨ç¤ºé¢œè‰²
      **/
     body: [],
-    //µ±Ç°ÒÆ¶¯µÄ·½Ïò,È¡Öµ0,1,2,3, ·Ö±ğ±íÊ¾ÏòÉÏ,ÓÒ,ÏÂ,×ó, °´¼üÅÌ·½Ïò¼ü¿ÉÒÔ¸Ä±äËü
+    //å½“å‰ç§»åŠ¨çš„æ–¹å‘,å–å€¼0,1,2,3, åˆ†åˆ«è¡¨ç¤ºå‘ä¸Š,å³,ä¸‹,å·¦, æŒ‰é”®ç›˜æ–¹å‘é”®å¯ä»¥æ”¹å˜å®ƒ
     direction: 0,
-    //¶¨Ê±Æ÷
+    //å®šæ—¶å™¨
     timer: null,
-    //ËÙ¶È
+    //é€Ÿåº¦
     speed: 250,
-    //ÊÇ·ñÒÑ¾­ÔİÍ£
+    //æ˜¯å¦å·²ç»æš‚åœ
     paused: true,
-    //ĞĞÊı
+    //è¡Œæ•°
     rowCount: 30,
-    //ÁĞÊı
+    //åˆ—æ•°
     colCount: 30,
-    //³õÊ¼»¯
+    //åˆå§‹åŒ–
     init: function(){
         var colors = ['red','orange','yellow','green','blue','purple','#ccc'];
         this.tbl = getElt("main");
         var x = 0;
         var y = 0;
         var colorIndex = 0;
-        //²úÉú³õÊ¼ÒÆ¶¯·½Ïò
+        //äº§ç”Ÿåˆå§‹ç§»åŠ¨æ–¹å‘
         this.direction = Math.floor(Math.random()*4);
-        //¹¹Ôìtable
+        //æ„é€ table
         for(var row=0;row<this.rowCount;row++){
             var tr=this.tbl.insertRow(-1);
             for(var col=0;col<this.colCount;col++) {
                 var td=tr.insertCell(-1);
             }
         }
-        //²úÉú20¸öËÉÉ¢½Úµã
+        //äº§ç”Ÿ20ä¸ªæ¾æ•£èŠ‚ç‚¹
         for(var i=0; i<10; i++){
             x = Math.floor(Math.random()*this.colCount);
             y = Math.floor(Math.random()*this.rowCount);
@@ -51,7 +51,7 @@ var Snake = {
                 this.tbl.rows[y].cells[x].style.backgroundColor = colors[colorIndex];
             }
         }
-        //²úÉúÉßÍ·
+        //äº§ç”Ÿè›‡å¤´
         while(true){
             x = Math.floor(Math.random()*this.colCount);
             y = Math.floor(Math.random()*this.rowCount);
@@ -62,7 +62,7 @@ var Snake = {
             }
         }
         this.paused = true;
-        //Ìí¼Ó¼üÅÌÊÂ¼ş
+        //æ·»åŠ é”®ç›˜äº‹ä»¶
         document.onkeydown= function(e){
             if (!e)e=window.event;
             switch(e.keyCode | e.which | e.charCode){
@@ -72,14 +72,14 @@ var Snake = {
                     Snake.paused = false;
                 }
                 else{
-                    //Èç¹ûÃ»ÓĞÔİÍ££¬ÔòÍ£Ö¹ÒÆ¶¯
+                    //å¦‚æœæ²¡æœ‰æš‚åœï¼Œåˆ™åœæ­¢ç§»åŠ¨
                     Snake.pause();
                     Snake.paused = true;
                 }
                 break;
             }
             case 37:{//left
-                //×èÖ¹Éßµ¹ÍË×ß
+                //é˜»æ­¢è›‡å€’é€€èµ°
                 if(Snake.direction==1){
                     break;
                 }
@@ -87,19 +87,19 @@ var Snake = {
                 break;
             }
             case 38:{//up
-                //¿ì½İ¼üÔÚÕâÀïÆğ×÷ÓÃ
+                //å¿«æ·é”®åœ¨è¿™é‡Œèµ·ä½œç”¨
                 if(event.ctrlKey){
                     Snake.speedUp(-20);
                     break;
                 }
-                if(Snake.direction==2){//×èÖ¹Éßµ¹ÍË×ß
+                if(Snake.direction==2){//é˜»æ­¢è›‡å€’é€€èµ°
                     break;
                 }
                 Snake.direction = 0;
                 break;
             }
             case 39:{//right
-                if(Snake.direction==3){//×èÖ¹Éßµ¹ÍË×ß
+                if(Snake.direction==3){//é˜»æ­¢è›‡å€’é€€èµ°
                     break;
                 }
                 Snake.direction = 1;
@@ -110,7 +110,7 @@ var Snake = {
                     Snake.speedUp(20);
                     break;
                 }
-                if(Snake.direction==0){//×èÖ¹Éßµ¹ÍË×ß
+                if(Snake.direction==0){//é˜»æ­¢è›‡å€’é€€èµ°
                     break;
                 }
                 Snake.direction = 2;
@@ -119,7 +119,7 @@ var Snake = {
             }
         };
     },
-    //ÒÆ¶¯
+    //ç§»åŠ¨
     move: function() {
         this.timer = setInterval(function(){
             Snake.erase();
@@ -127,7 +127,7 @@ var Snake = {
             Snake.paint();
         }, this.speed);
     },
-    //ÒÆ¶¯Ò»½ÚÉíÌå
+    //ç§»åŠ¨ä¸€èŠ‚èº«ä½“
     moveOneStep: function(){
         if(this.checkNextStep()==-1) {
             clearInterval(this.timer);
@@ -140,24 +140,24 @@ var Snake = {
             var _y = _point.y;
             var _color = this.getColor(_x,_y);
             this.body.unshift({x:_x,y:_y,color:_color});
-            //ÒòÎª³ÔÁËÒ»¸öÊ³Îï£¬ËùÒÔÔÙ²úÉúÒ»¸öÊ³Îï
+            //å› ä¸ºåƒäº†ä¸€ä¸ªé£Ÿç‰©ï¼Œæ‰€ä»¥å†äº§ç”Ÿä¸€ä¸ªé£Ÿç‰©
             this.generateDood();
             return;
         }
         //window.status = this.toString();
         var point = this.getNextPos();
-        //±£ÁôµÚÒ»½ÚµÄÑÕÉ«
+        //ä¿ç•™ç¬¬ä¸€èŠ‚çš„é¢œè‰²
         var color = this.body[0].color;
-        //ÑÕÉ«ÏòÇ°ÒÆ¶¯
+        //é¢œè‰²å‘å‰ç§»åŠ¨
         for(var i=0; i<this.body.length-1; i++){
             this.body[i].color = this.body[i+1].color;
         }
-        //ÉßÎ²¼õÒ»½Ú£¬ ÉßÎ²¼ÓÒ»½Ú£¬³ÊÏÖÉßÇ°½øµÄĞ§¹û
+        //è›‡å°¾å‡ä¸€èŠ‚ï¼Œ è›‡å°¾åŠ ä¸€èŠ‚ï¼Œå‘ˆç°è›‡å‰è¿›çš„æ•ˆæœ
         this.body.pop();
         this.body.unshift({x:point.x,y:point.y,color:color});
         //window.status = this.toString();
     },
-    //Ì½Ñ°ÏÂÒ»²½½«×ßµ½Ê²Ã´µØ·½
+    //æ¢å¯»ä¸‹ä¸€æ­¥å°†èµ°åˆ°ä»€ä¹ˆåœ°æ–¹
     pause: function(){
         clearInterval(Snake.timer);
         this.paint();
@@ -166,67 +166,67 @@ var Snake = {
         var x = this.body[0].x;
         var y = this.body[0].y;
         var color = this.body[0].color;
-        //ÏòÉÏ
+        //å‘ä¸Š
         if(this.direction==0){
             y--;
         }
-        //ÏòÓÒ
+        //å‘å³
         else if(this.direction==1){
             x++;
         }
-        //ÏòÏÂ
+        //å‘ä¸‹
         else if(this.direction==2){
             y++;
         }
-        //Ïò×ó
+        //å‘å·¦
         else{
             x--;
         }
-        //·µ»ØÒ»¸ö×ø±ê
+        //è¿”å›ä¸€ä¸ªåæ ‡
         return {x:x,y:y};
     },
-    //¼ì²é½«ÒªÒÆ¶¯µ½µÄÏÂÒ»²½ÊÇÊ²Ã´
+    //æ£€æŸ¥å°†è¦ç§»åŠ¨åˆ°çš„ä¸‹ä¸€æ­¥æ˜¯ä»€ä¹ˆ
     checkNextStep: function(){
         var point = this.getNextPos();
         var x = point.x;
         var y = point.y;
         if(x<0||x>=this.colCount||y<0||y>=this.rowCount){
-            return -1;//´¥±ß½ç£¬ÓÎÏ·½áÊø
+            return -1;//è§¦è¾¹ç•Œï¼Œæ¸¸æˆç»“æŸ
         }
         for(var i=0; i<this.body.length; i++){
             if(this.body[i].x==x&&this.body[i].y==y){
-                return -1;//Åöµ½×Ô¼ºµÄÉíÌå,ÓÎÏ·½áÊø
+                return -1;//ç¢°åˆ°è‡ªå·±çš„èº«ä½“,æ¸¸æˆç»“æŸ
             }
         }
         if(this.isCellFilled(x,y)){
-            return 1;//ÓĞ¶«Î÷
+            return 1;//æœ‰ä¸œè¥¿
         }
-        return 0;//¿ÕµØ
+        return 0;//ç©ºåœ°
     },
-    //²Á³ıÉßÉí
+    //æ“¦é™¤è›‡èº«
     erase: function(){
         for(var i=0; i<this.body.length; i++){
             this.eraseDot(this.body[i].x, this.body[i].y);
         }
     },
-    //»æÖÆÉßÉí
+    //ç»˜åˆ¶è›‡èº«
     paint: function(){
         for(var i=0; i<this.body.length; i++){
             this.paintDot(this.body[i].x, this.body[i].y,this.body[i].color);
         }
     },
-    //²Á³ıÒ»½Ú
+    //æ“¦é™¤ä¸€èŠ‚
     eraseDot: function(x,y){
         this.tbl.rows[y].cells[x].style.backgroundColor = "";
     },
     paintDot: function(x,y,color){
         this.tbl.rows[y].cells[x].style.backgroundColor = color;
     },
-    //µÃµ½Ò»¸ö×ø±êÉÏµÄÑÕÉ«
+    //å¾—åˆ°ä¸€ä¸ªåæ ‡ä¸Šçš„é¢œè‰²
     getColor: function(x,y){
         return this.tbl.rows[y].cells[x].style.backgroundColor;
     },
-    //ÓÃÓÚµ÷ÊÔ
+    //ç”¨äºè°ƒè¯•
     toString: function(){
         var str = "";
         for(var i=0; i<this.body.length; i++){
@@ -234,14 +234,14 @@ var Snake = {
         }
         return str;
     },
-    //¼ì²éÒ»¸ö×ø±êµãÓĞÃ»ÓĞ±»Ìî³ä
+    //æ£€æŸ¥ä¸€ä¸ªåæ ‡ç‚¹æœ‰æ²¡æœ‰è¢«å¡«å……
     isCellFilled: function(x,y){
         if(this.tbl.rows[y].cells[x].style.backgroundColor == ""){
             return false;
         }
         return true;
     },
-    //ÖØĞÂ¿ªÊ¼
+    //é‡æ–°å¼€å§‹
     restart: function(){
         if(this.timer){
             clearInterval(this.timer);
@@ -253,7 +253,7 @@ var Snake = {
         this.init();
         this.speed = 250;
     },
-    //¼ÓËÙ
+    //åŠ é€Ÿ
     speedUp: function(time){
         if(!this.paused){
             if(this.speed+time<10||this.speed+time>2000){
@@ -264,7 +264,7 @@ var Snake = {
 	    this.move();
         }
     },
-    //²úÉúÊ³Îï¡£
+    //äº§ç”Ÿé£Ÿç‰©ã€‚
     generateDood: function(){
         var colors = ['red','orange','yellow','green','blue','purple','#ccc'];
     	var x = Math.floor(Math.random()*this.colCount);

@@ -1,20 +1,20 @@
-#+STARTUP: indent
-* ������ҳ��̰����
-** TODO ��ԭ����ҳ��JavaScript������ȡ��������ǰ̨��̨�Ĺ��ܽ��д�ɶ��js�ļ�
-*** TODO ��̰���ߵ����̽��зֽ⣬ǰ̨�йص���[X]��ʾ
-- [ ] ��̨��������ߡ�ʳ��ĳ�ʼ���꣬�Լ��ߵĳ�ʼ���򣬷��͸�ǰ̨
-- [X] ǰ̨��ʾ�ߡ�ʳ���λ��
-- [ ] �û������ʼ��ǰ̨���͸���̨��ʼָ��
-- [X] �û����·�����Ժ���ҳ���յ���������������һ�������͸���̨
-- [ ] ��̨����������һ����ռ�ݵ����ꡢ��������ʳ��λ�ã����ж���Ϸ�Ƿ����������Щ��Ϣ����һ��ʱ��������ǰ̨
-- [X] ǰ̨���յ�������Ϣ�Ժ�ˢ����ʾ�ߵ�λ�á�ʳ���Ϸ����ʱ������ʾ
-** ����python��javascript�Ľ��������½�
-** �����д�˼��
-* ������򵥵Ļ���python��javascript�Ľ���
-** ��python��web.py����web����
-** ǰ̨��html����ҳ����javascript������һ�����ݸ�����json�����͸���̨
-*** javascript�����HTTPЭ�飬GET��POST��PUT��DELETE
-**** ������jquery
-***** DONE ��ʵ��һ����������򵥵����ӣ����ر�����һ��json�ļ���ͨ��jquery����֮
-** ��̨��python���ԣ����յ���json�Ժ󣬼��޸�һ�����ԣ����ظ�ǰ̨��ǰ̨����alert
-*** ��ν��յ�json��python���봦������������
+﻿#+STARTUP: indent
+* 基于网页的贪吃蛇
+** TODO 将原有网页的JavaScript代码提取出来，将前台后台的功能解耦，写成多个js文件
+*** TODO 将贪吃蛇的流程进行分解，前台有关的用[X]表示
+- [ ] 后台随机生成蛇、食物的初始坐标，以及蛇的初始方向，发送给前台
+- [X] 前台显示蛇、食物的位置
+- [ ] 用户点击开始，前台发送给后台开始指令
+- [X] 用户按下方向键以后，网页接收到按键动作，将下一步方向发送给后台
+- [ ] 后台生成蛇在下一步将占据的坐标、方向，所有食物位置，并判断游戏是否结束，将这些信息按照一定时间间隔发给前台
+- [X] 前台接收到上述信息以后，刷新显示蛇的位置、食物，游戏结束时给出提示
+** 试验python与javascript的交互，见下节
+** 后续有待思考
+* 最最最简单的基于python和javascript的交互
+** 用python的web.py开启web服务
+** 前台用html搭网页，用javascript，生成一个内容给定的json，发送给后台
+*** javascript如何用HTTP协议，GET，POST，PUT，DELETE
+**** 方案用jquery
+***** DONE 先实现一个最最最最简单的例子，本地保存了一个json文件，通过jquery调用之
+** 后台用python语言，接收到该json以后，简单修改一个属性，返回给前台，前台给出alert
+*** 如何接收到json给python代码处理，怎样返回
