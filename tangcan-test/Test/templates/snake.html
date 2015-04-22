@@ -1,5 +1,6 @@
 <html>
 <head>
+    <script src="static/js/jquery-1.11.2.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>贪吃蛇 Snake v2.4</title>
 <style>
@@ -21,7 +22,7 @@
 </style>
 </head>
 <script>
-    function $(id){return document.getElementById(id);}
+    
 /**************************************************************
 * javascript贪吃蛇 v2.4 <br />
 * author: sunxing007  05/14/2009<br />
@@ -29,6 +30,8 @@
 * v2.4修正了蛇身颜色可以随着蛇前进而移动
 **************************************************************/
     //贪吃蛇类
+    var jsonhttp;
+    var controlDATA1;
     var Snake = {
         tbl: null,
         /**
@@ -52,7 +55,7 @@
         //初始化
         init: function(){
             var colors = ['red','orange','yellow','green','blue','purple','#ccc'];
-            this.tbl = $("main");
+            this.tbl = document.getElementById("main");
             var x = 0;
             var y = 0;
             var colorIndex = 0;
@@ -146,10 +149,61 @@
         move: function() {
             this.timer = setInterval(function(){
                 Snake.erase();
+                //Snake.controlDATA();
                 Snake.moveOneStep();
+                Snake.transportDATA();
                 Snake.paint();
             }, this.speed);
         },
+
+//**************************************************************
+        
+        transportDATA: function(){
+        //var DATA={"body":Snake.body,"direction":Snake.direction} ;
+        //var DATA2={"direction":Snake.direction} ;
+        //alert(Snake.body[0].x);
+            var  jsonDATA='{"body":[';
+            var head;
+        //数据结构{x:x0, y:y0, color:color0},
+            for(var i=0;i<Snake.body.length;i++){
+                jsonDATA=jsonDATA+'{"x":'+Snake.body[i].x+',"y":'+Snake.body[i].y+'},';
+                if(Snake.body[i].color == 'black'){
+                            head='],"head":{"x":'+Snake.body[i].x+',"y":'+Snake.body[i].y+'}}';
+                }
+            }
+            jsonDATA=jsonDATA+'],"direction":'+Snake.direction+',"food":[';
+
+            for(var x=0;x<30;x++){
+                for(var y=0;y<30;y++){
+                    if(this.isCellFilled(x,y)){
+                        jsonDATA=jsonDATA+'{"x":'+x+',"y":'+y+'},';
+                    }
+                }
+            }
+            jsonDATA=jsonDATA+head;
+            jQuery.post("http://localhost:8080/F/12345",
+                        jsonDATA,
+                        function(){
+                            //alert("FF");
+                            jQuery.get("http://localhost:8080/F/12345",
+                                       function(data){
+                                           //alert("("+data+")");
+                                           //controlDATA1=""+data;
+                                           var ctrlDATA=eval("("+data+")");
+                                           Snake.direction=ctrlDATA.direction;
+                                       });
+                        });
+            //jQuery.get("http://localhost:8080/F/12345",function(data){alert(data);});
+            
+
+
+
+        },
+       
+
+
+   
+//****************************************************************
         //移动一节身体
         moveOneStep: function(){
             if(this.checkNextStep()==-1) {
@@ -298,6 +352,7 @@
             }
         }
     };
+
 </script>
 
 
@@ -309,7 +364,7 @@
 <input type="button" id="upSpeed" value="speedup" />
 <input type="button" id="downSpeed" value="speeddown" />
 <script>
-		$('btn').onclick = function(){
+		document.getElementById('btn').onclick = function(){
 				if(Snake.paused){
 						Snake.move();
 						Snake.paused = false;
@@ -319,14 +374,14 @@
 						Snake.paused = true;
 				}
 		};
-		$("reset").onclick = function(){
+		document.getElementById("reset").onclick = function(){
 				Snake.restart();
 				this.blur();
 		};
-		$("upSpeed").onclick = function(){
-				Snake.speedUp(-20);
+		document.getElementById("upSpeed").onclick = function(){
+				Snake.speedUp(-20);       // alert(controlDATA1);
 		};
-		$("downSpeed").onclick = function(){
+		document.getElementById("downSpeed").onclick = function(){
 				Snake.speedUp(20);
 		};
 </script>

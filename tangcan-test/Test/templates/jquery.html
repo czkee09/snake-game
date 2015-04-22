@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $.get("http://localhost:8080/F/12345",function(data/*,status*/){
+      alert("数据：" + data/* + "\n状态：" + status*/);
+    });
+  });
+});
+</script>
+</head>
+<body>
+
+<button>Get</button>
+
+</body>
+</html>

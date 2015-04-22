@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="text/html charset=utf-8"/>
+    <title>lin3615</title>
+
+</head>
+<body>
+<h1>测试内容</h1>
+
+<div id="id1">XX</div>
+<div id="id2">222</div>
+<div id="id3">333</div>
+<div id="id4">4444</div>
+<a href="javascript:void(0);" onClick="ok();">Onclick</a>
+</body>
+</html>
+<script type="text/javascript">
+   var xmlhttp;
+    function ok()
+    {
+
+        if(window.XMLHttpRequest)
+        {
+      xmlhttp = new XMLHttpRequest();
+        }else
+        {
+      xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+ xmlhttp.open('get', 'http://localhost:8080/F/12345', true);//异步
+
+
+        xmlhttp.onreadystatechange = function(){
+ //alert(xmlhttp.readyState); alert(xmlhttp.status);
+    if(xmlhttp.readyState== 4 && xmlhttp.status == 200)
+            {
+    document.getElementById('id4').innerHTML = xmlhttp.responseText;
+        
+            }
+
+}
+       
+        xmlhttp.send(null);
+        
+       // document.getElementById('id4').innerHTML = xmlhttp.responseText;
+    }
+
+
+
+
+</script>

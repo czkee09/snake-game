@@ -18,3 +18,16 @@
 ***** DONE 先实现一个最最最最简单的例子，本地保存了一个json文件，通过jquery调用之
 ** 后台用python语言，接收到该json以后，简单修改一个属性，返回给前台，前台给出alert
 *** 如何接收到json给python代码处理，怎样返回
+* 学习路线，少安毋躁，欲速则不达
+** Python
+*** PyCharm edu edition
+*** A Byte of Python
+** Rest
+*** Restful Web Services
+** Framework
+*** web.py
+*** Flask
+** MVC Design Pattern
+*** RoR
+**** Ruby in 20 mins
+**** Rails Guides http://guides.rubyonrails.org/
